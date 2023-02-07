@@ -1,15 +1,10 @@
 
 public class LinkedList {
-    private Node head;
-    private int size;
-
-    LinkedList() {
-        this.size = 0;
-    }
+    private static Node head;
 
     class Node {
-        private int value;
-        private Node next;
+        public int value;
+        public Node next;
 
         Node(int value) {
             this.value = value;
@@ -41,12 +36,12 @@ public class LinkedList {
         Node temp = head;
         while (temp != null) {
             if (count == pos - 1) {
-                newNode.next=temp.next;
+                newNode.next = temp.next;
                 temp.next = newNode;
                 return;
             }
             temp = temp.next;
-            count+=1;
+            count += 1;
         }
 
     }
@@ -73,7 +68,19 @@ public class LinkedList {
         System.out.println("Deleted last Node");
     }
 
-    public void display() {
+    public Node reverse() {
+        Node curr = head;
+        Node prev = null;
+        while (curr != null) {
+            Node temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+
+    public void display(Node head) {
         Node temp = head;
         while (temp != null) {
             System.out.print(temp.value + "->");
@@ -90,9 +97,12 @@ public class LinkedList {
         l1.insertFirst(4);
         l1.insertLast(5);
         l1.insertAtPosition(2, 6);
-        l1.insertAtPosition(4,10);
+        l1.insertAtPosition(4, 10);
         l1.deleteFirst();
         l1.deleteLast();
-        l1.display();
+        l1.display(head);
+        Node head = l1.reverse();
+        System.out.println();
+        l1.display(head);
     }
 }
